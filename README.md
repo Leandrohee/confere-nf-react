@@ -23,7 +23,7 @@ export default defineConfig({
 });
 ```
 
-2. Install dependencies gh-pages
+2. Install dependencies gh-pages to generate a branch named **gh-pages**
 ```ts
 yarn add gh-pages -D
 ``` 
