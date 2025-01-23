@@ -43,3 +43,12 @@ yarn add gh-pages -D
 npm run build
 npm run deploy
 ```
+
+5. Configure gitpages
+
+Go to your repository on GitHub.
+Navigate to Settings > Pages.
+Under Source, select the gh-pages branch.
+Save the settings.
+
+https://leandrohee.github.io/confere-nf-react/
