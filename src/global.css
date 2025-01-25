@@ -8,7 +8,7 @@
 body{
   height: 100vh;
   width: 100vw;
-  padding-top: 5vh;
+  /* padding-top: 5vh; */
 }
 
 /* -------------------------------------- VARIAVEIS DE CSS -------------------------------------- */
@@ -16,4 +16,9 @@ body{
   --bg: #ffffff;
   --grey: gray;
   --border_radius: 20px;
+}
+
+.main-div{
+  display: flex;
+  flex-direction: column;
 }

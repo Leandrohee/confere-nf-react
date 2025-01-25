@@ -1,10 +1,10 @@
-import Table from "./Components/Table"
+import Home from "./Pages/Home"
+
 
 function App() {
 
   return (
-    <Table>
-    </Table>
+    <Home/>
   )
 }
 

@@ -52,3 +52,10 @@ Under Source, select the gh-pages branch.
 Save the settings.
 
 https://leandrohee.github.io/confere-nf-react/
+
+
+# Tecnologias usadadas
+
+1. pdfjs-div -> Para ler os pdf. Tive que usar a versão "3.7.107" pq era a unica que tinha um cdn para workers que funcionava.
+
+2. 

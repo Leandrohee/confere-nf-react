@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { useLinhasContext } from "../../Context/linhas/linhas";
 
 /* --------------------------------------------- CSS -------------------------------------------- */
 export const TableSC = styled.table`
@@ -7,9 +8,10 @@ export const TableSC = styled.table`
     width: 70%;
     border-spacing: 0;                                  //Removing the space between cells
     border-collapse: separate;
-    border: 1px solid black;
+    border: 1px solid #6f798d;
     border-radius: var(--border_radius);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    /* margin-top: 20px; */
 
     //Titulo
     h3{
@@ -50,7 +52,7 @@ export const TableSC = styled.table`
     }
 
     .th-empresa{
-        border-top: 1px solid black;
+        border-top: 1px solid #6f798d;
     }
 
     .tr-cabecalho{
@@ -72,8 +74,8 @@ export const TableSC = styled.table`
     //Cedula do corpo da tabela
     td{
         text-align: center;
-        border-top:  1px solid black;
-        border-right: 1px solid black;
+        border-top:  1px solid #6f798d;
+        border-right: 1px solid #6f798d;
         width: 20%;
     }
     
@@ -85,19 +87,10 @@ export const TableSC = styled.table`
     
 `
 
-/* ----------------------------------------- INTERFACES ----------------------------------------- */
-interface Linhas{
-    lin: number
-    col1: string,
-    col2: string|number|null,
-    col3: string|number|null,
-    col4: string|null,
-}
-
-
+/* ----------------------------------------- COMPONENTE ----------------------------------------- */
 export default function Table() {
-
-    const titulo: string = "CONFERÊNCIA";
+    const linhasProvider = useLinhasContext()
+    const titulo: string = linhasProvider.tituloTb;
 
     const colunas: Array<string> = [
         "CAMPO",
@@ -106,24 +99,7 @@ export default function Table() {
         "RESULTADO"
     ]; 
 
-    const linhas: Array<Linhas> = [
-        {
-            lin: 1,
-            col1: "PEDIDOS",
-            col2: 1545,
-            col3: 1545,
-            col4: "OK"
-        },
-        {
-            lin: 2,
-            col1: "O.S",
-            col2: 2222,
-            col3: 2222,
-            col4: "OK"
-        },
-    ]
-
-
+    
   return (
     <TableSC>
         <thead>
@@ -134,16 +110,16 @@ export default function Table() {
             </tr>
             <tr> 
                 {
-                    colunas.map(coluna => (
-                        <th>{coluna}</th>
+                    colunas.map((coluna,index) => (
+                        <th key={index}>{coluna}</th>
                     ))
                 }
             </tr>
         </thead>
         <tbody>
             {
-                linhas.map(linha => (
-                    <tr>
+                linhasProvider.linhas.map((linha,index) => (
+                    <tr key={index}>
                         <td>{linha.col1}</td>
                         <td>{linha.col2}</td>
                         <td>{linha.col3}</td>
