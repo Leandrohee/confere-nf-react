@@ -13,6 +13,12 @@ Create the engine on package.json
 },
 ```
 
+Instalar dependencias
+
+```bash
+yarn install
+```
+
 # How to deploy this project on the github pages
 
 1. Config the vite.config.ts to match the repository name
@@ -42,6 +48,17 @@ yarn add gh-pages -D
 ```bash
 npm run build
 npm run deploy
+```
+
+4. Configurar o git
+
+```bash
+git init
+git add .
+git commit -m "My first commit"
+git branch -M main
+git remote add origin https://github.com/Leandrohee/portfolio.git
+git push -u origin main
 ```
 
 5. Configure gitpages
