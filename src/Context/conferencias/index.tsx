@@ -22,8 +22,6 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
     const linhas = useLinhasContext()
     const pagpdf = usePagPdfContext()
 
-    
-
     //Busca informacoes
     function fazConferencias(){
         //CONFERENCIAS
@@ -32,6 +30,9 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
 
         //ATUALIZACOES
         linhas.setTituloTb(resultadoFornecedor)
+        linhas.setLinhas(linhas.linhas.map(linha => (
+           linha.col1 == "PEDIDO" ? resultadoPedido : linha
+        )))
     
 
     }

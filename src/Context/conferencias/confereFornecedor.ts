@@ -21,7 +21,7 @@ export function fnConfereFornecedor(pagpdf:  pagPdf[]|null): string {
 
     //Se fornecedor nao encontrado
     if (!fornecedorEncontrado) {
-        return "Fornecedor n encontrado"
+        return "Fornecedor não encontrado"
     }
 
     //Retornando o fornecedor encontrado transformado em string novamente

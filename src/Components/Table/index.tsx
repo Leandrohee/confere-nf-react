@@ -103,7 +103,6 @@ export default function Table() {
         "RESULTADO"
     ]; 
 
-    
   return (
     <TableSC>
         <thead>
@@ -123,7 +122,14 @@ export default function Table() {
         <tbody>
             {
                 linhasProvider.linhas.map((linha,index) => (
-                    <tr key={index}>
+                    <tr 
+                        key={index}
+                        style={
+                            linha.col4 == 'OK' ? {backgroundColor: "lightgreen" } : 
+                            linha.col4 == null ? {backgroundColor: "transparent"} :
+                            {background: "salmon"}
+                        }
+                    >
                         <td>{linha.col1}</td>
                         <td>{linha.col2}</td>
                         <td>{linha.col3}</td>
