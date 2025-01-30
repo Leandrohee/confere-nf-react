@@ -1,6 +1,4 @@
 import { pagPdf } from "../pagPdf/pagPdft";
-import { fornecedores } from "../../utils/Fonecedores";
-import { vLinhasPadrao } from "../linhas/linhas";
 
 /* ------------------------ CONFERE SE O N DO PED NA NF E NOS DEMAIS DOCS ----------------------- */
 export function fnConferePedido(pagpdf: pagPdf[]|null): any{
