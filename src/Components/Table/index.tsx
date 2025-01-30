@@ -18,6 +18,10 @@ export const TableSC = styled.table`
         text-align: center;
     }
 
+    p{
+        color: red;
+    }
+
     //Arredondando bordas
     thead,
     tr:first-child th:first-child{
@@ -90,7 +94,7 @@ export const TableSC = styled.table`
 /* ----------------------------------------- COMPONENTE ----------------------------------------- */
 export default function Table() {
     const linhasProvider = useLinhasContext()
-    const titulo: string = linhasProvider.tituloTb;
+    const titulo = linhasProvider.tituloTb;
 
     const colunas: Array<string> = [
         "CAMPO",
@@ -105,7 +109,7 @@ export default function Table() {
         <thead>
             <tr>
                 <th colSpan={4}>
-                    <h3>{titulo}</h3>
+                    <h3>CONFERÊNCIA<p>{titulo}</p></h3>
                 </th>
             </tr>
             <tr> 

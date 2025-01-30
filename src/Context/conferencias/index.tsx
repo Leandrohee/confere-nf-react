@@ -4,10 +4,12 @@ import { createContext, useContext } from "react"
 import { fnConfereFornecedor } from "./confereFornecedor"
 import { usePagPdfContext } from "../pagPdf/pagPdft"
 import { useLinhasContext } from "../linhas/linhas"
+import { fnConferePedido } from "./conferePedido"
 
 //Tudo oq o context vai distribuir
 interface ConferenciasProps{
-    fazConferencias: any
+    fazConferencias: any,
+    logs: any
 }
 
 /* ----------------------------- CRIANDO O CONTEXT PARA CONFERENCIAS ---------------------------- */
@@ -21,23 +23,34 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
     const pagpdf = usePagPdfContext()
 
     
+
     //Busca informacoes
     function fazConferencias(){
-        const resultadoFornecedor = fnConfereFornecedor(pagpdf.pagPdf);               //Pega informacao sobre o fornecedor
-        // const conferePeddo = fnConferePedido(pagpdf)                             //Infromacao sobre o pedido
-    
-        //Atualiza titulo
-        linhas.setTituloTb((prev:any) => prev + ` - ${resultadoFornecedor}`)
-    
-        //Atualiza as demais linhas 
-        // linhas.linhas.filter(linha => linha.col1 == "PEDIDO")
+        //CONFERENCIAS
+        const resultadoFornecedor = fnConfereFornecedor(pagpdf.pagPdf);             //Informacao sobre o fornecedor
+        const resultadoPedido = fnConferePedido(pagpdf.pagPdf);                     //Infromacao sobre o pedido
 
+        //ATUALIZACOES
+        linhas.setTituloTb(resultadoFornecedor)
+    
+
+    }
+
+
+    //Só retorna os resultados das funcoes
+    function logs(){
+        const paginas = pagpdf.pagPdf
+        console.log("FORNECEDORES:")
+        console.log(fnConfereFornecedor(paginas))
+        console.log("PEDIDOS:")
+        console.log(fnConferePedido(paginas))
     }
     
     return(
         <ConferenciasContext.Provider  value={
             {
-                fazConferencias
+                fazConferencias,
+                logs
             }
         }>
             {children}

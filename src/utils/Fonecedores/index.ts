@@ -74,7 +74,7 @@ const fornecedor3 = new Fornecedor(
 );
 
 const fornecedor4 = new Fornecedor(
-    "parts",                                                //Nome              -> formato: string
+    "parts lub",                                            //Nome              -> formato: string
     "21/2025",                                              //Ne                -> formato: 00/0000
     "46/2024",                                              //Contrato          -> formato: 00/0000
     [
@@ -117,6 +117,18 @@ const fornecedor5 = new Fornecedor(
     ]
 );
 
+const fornecedor6 = new Fornecedor(
+    "patricia",                                             //Nome              -> formato: string
+    "52/2025",                                              //Ne                -> formato: 00/0000
+    "43/2024",                                              //Contrato          -> formato: 00/0000
+    [
+        {
+            linha: "agrale",                                //Nome da linha     -> formato: string
+            desconto: "49,00"                               //Desconto          -> formato: 00,00
+        },
+    ]
+);
+
 
 /* ------------------------------------ TODOS OS FORNECEDORES ----------------------------------- */
 export const fornecedores: FornecedoresProps[] = [
@@ -125,4 +137,5 @@ export const fornecedores: FornecedoresProps[] = [
     fornecedor3,
     fornecedor4,
     fornecedor5,
+    fornecedor6
 ]

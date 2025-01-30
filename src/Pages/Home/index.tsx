@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { Button } from "../../Components/Button"
 import Table from "../../Components/Table"
 import UploadBox from "../../Components/UploadBox"
+import Help from "../../Components/Help"
 
 /* --------------------------------------- ESTILIZACAO CSS -------------------------------------- */
 export const HomeSc = styled.div`
@@ -18,6 +19,7 @@ export const HomeSc = styled.div`
 export default function Home() {
   return (
     <HomeSc>
+        <Help/>
         <UploadBox/>
         <Button
             width="15%"

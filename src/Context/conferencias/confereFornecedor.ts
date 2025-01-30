@@ -2,14 +2,13 @@ import { fornecedores } from "../../utils/Fonecedores";
 import { pagPdf } from "../pagPdf/pagPdft";
 
 /* ------------------- FUNCAO QUE CONFERE O FORNECEDOR NA PRIMEIRA PAGINA (NF) ------------------ */
-export function fnConfereFornecedor(pagpdf:  pagPdf[]|null): any {
+export function fnConfereFornecedor(pagpdf:  pagPdf[]|null): string {
     //Lidando com erros
     if(!pagpdf){
-        console.log("Nao foi enviada nenhuma pagina")
-        return "";
+        return "Nao foi enviada nenhuma pagina";
     }
     
-    const primeiraPagina = pagpdf.filter(pagina => pagina.pagina  == 1)   
+    const primeiraPagina = pagpdf.filter(pagina => pagina.pagina  == 1)[0].conteudo   
     const nomeFornecedores = fornecedores.map(fornecedor  => fornecedor.nome)
     
     //transformando os nomes de fornecedores em regex
@@ -17,7 +16,7 @@ export function fnConfereFornecedor(pagpdf:  pagPdf[]|null): any {
 
     //Encontrando o fornecedor atraves de regex
     const fornecedorEncontrado: RegExp|undefined = nomeFornecedoresRegex.find((regex) => 
-        regex.test(primeiraPagina[0].conteudo)
+        regex.test(primeiraPagina)
     )
 
     //Se fornecedor nao encontrado

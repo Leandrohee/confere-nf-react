@@ -1,6 +1,7 @@
 import { ReactNode } from "react"
 import styled from "styled-components"
 import { useConferenciasContext } from "../../Context/conferencias"
+import { usePagPdfContext } from "../../Context/pagPdf/pagPdft"
 
 /* --------------------------------------- ESTILIZACAO CSS -------------------------------------- */
 const ButtonSC = styled.button<SCProps>`
@@ -73,9 +74,13 @@ interface SCProps{
 /* ----------------------------------------- COMPONENTE ----------------------------------------- */
 export function Button(props: ButtonProps){
     const confere = useConferenciasContext()
+    const pagpdf = usePagPdfContext()
 
     function handleClick(){
-        confere.fazConferencias()
+        //Checking if there is any data in the pdf-data to continuie
+        if(pagpdf.pagPdf){
+            confere.fazConferencias()
+        }
     }
 
     return(

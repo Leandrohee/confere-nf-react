@@ -16,7 +16,7 @@ interface linhasContextProps{
     setLinhas: any,        //Pra falar que é o metodo useState
     linhas: LinhasProps[],
     setTituloTb: Dispatch<SetStateAction<string>>|any,                  //Pra falar que é o metodo useState
-    tituloTb: string
+    tituloTb: string|null
 }
 
 /* ------------------------------- CRIANDO UM CONTEXT PARA LINHAS ------------------------------- */
@@ -58,14 +58,12 @@ export function vLinhasPadrao(): Array<LinhasProps>{
 }
 
 /* ----------------------- CRIANDO UM VALOR PADRAO PARA O TITULO DA TABELA ---------------------- */
-export const vTituloTb  = "CONFERÊNCIA"
+export const vTituloTb: null|string = null
 
 /* ------------------------------ CRIANDO O PROVIDER PARA AS LINHAS ----------------------------- */
 export function LinhaProvider({children}: {children: React.ReactNode}){
     const [linhas, setLinhas] = useState(vLinhasPadrao())
     const [tituloTb, setTituloTb] = useState(vTituloTb)
-
-    console.log(setLinhas)
 
     return(
         <LinhaContext.Provider value={

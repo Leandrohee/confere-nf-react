@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 import * as pdfJsLib from "pdfjs-dist";
 import { usePagPdfContext } from "../../Context/pagPdf/pagPdft";
+import { useLinhasContext, vLinhasPadrao, vTituloTb } from "../../Context/linhas/linhas";
 pdfJsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.7.107/pdf.worker.min.js`;
 
 /* --------------------------------------- ESTILIZACAO CSS -------------------------------------- */
@@ -41,6 +42,7 @@ export default function UploadBox() {
     const fileInputRef = useRef<HTMLInputElement | null>(null);                     //Referenciando o input
     const [desc, setDesc] = useState<null|string>(null)
     const pagPdfProvider = usePagPdfContext()
+    const linhasProvider = useLinhasContext()
 
     //Clica no input e abre a funcao handleFileChange
     function handleClick(){ 
@@ -51,6 +53,11 @@ export default function UploadBox() {
 
     async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
         const file:any = event.target.files?.[0];
+
+        //Returning the original state of the tabble and the pdf-data
+        linhasProvider.setTituloTb(vTituloTb)
+        linhasProvider.setLinhas(vLinhasPadrao())
+        pagPdfProvider.setPagPfg(null)
 
         //Checking if the file is a pdf
         if (file.type !== "application/pdf") {
