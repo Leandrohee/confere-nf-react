@@ -76,3 +76,14 @@ https://leandrohee.github.io/confere-nf-react/
 1. pdfjs-div -> Para ler os pdf. Tive que usar a versão "3.7.107" pq era a unica que tinha um cdn para workers que funcionava.
 
 2. 
+
+
+# Trocar dados dos fornecedores
+
+Para trocar os dados dos fornecedores é só ir na pasta ./utils/Fornecedores/index.ts
+
+Utilizar a formatacao descrita no arquivo
+
+# Acrescentar e retirar linhas
+
+Para organizar as linhas ir no arquivo ./Context/linhas/linhas.tsx e configurar a variável **titulosLinhas**

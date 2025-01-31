@@ -72,7 +72,7 @@ export const TableSC = styled.table`
     
     //Linha
     tr{
-        height: 5vh;
+        height: 4.7vh;
         width: 100%;
         background-color: #EEEEEE;
     }

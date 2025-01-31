@@ -10,8 +10,8 @@ export const UploadBoxSC = styled.div`
     display: flex;
     flex-direction: column;
     font-family: 'Courier New', Courier, monospace;
-    height: 100px;
-    width: 500px;
+    height: 80px;
+    width: 35vw;
     margin: 20px auto 0  auto;
     background-color: #0096FF;
     border: 1px solid black;

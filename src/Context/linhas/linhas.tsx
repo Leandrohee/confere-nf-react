@@ -30,6 +30,7 @@ export function vLinhasPadrao(): Array<LinhasProps>{
     const titulosLinhas= [
         "PEDIDO",
         "O.S",
+        "DANFE",
         "EMPENHO",
         "CONTRATO",
         "PREFIXO",
