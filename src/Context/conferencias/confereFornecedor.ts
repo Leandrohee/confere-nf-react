@@ -2,7 +2,7 @@ import { fornecedores } from "../../utils/Fonecedores";
 import { pagPdf } from "../pagPdf/pagPdft";
 
 /* ------------------- FUNCAO QUE CONFERE O FORNECEDOR NA PRIMEIRA PAGINA (NF) ------------------ */
-export function fnConfereFornecedor(pagpdf:  pagPdf[]|null): string {
+export async function fnConfereFornecedor(pagpdf:  pagPdf[]|null): Promise<string> {
     //Lidando com erros
     if(!pagpdf){
         return "Nao foi enviada nenhuma pagina";

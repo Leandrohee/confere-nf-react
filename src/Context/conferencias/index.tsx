@@ -5,6 +5,7 @@ import { fnConfereFornecedor } from "./confereFornecedor"
 import { usePagPdfContext } from "../pagPdf/pagPdft"
 import { useLinhasContext } from "../linhas/linhas"
 import { fnConferePedido } from "./conferePedido"
+import { fnConfereOs } from "./confereOs"
 
 //Tudo oq o context vai distribuir
 interface ConferenciasProps{
@@ -23,20 +24,21 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
     const pagpdf = usePagPdfContext()
 
     //Busca informacoes
-    function fazConferencias(){
+    async function fazConferencias(){
         //CONFERENCIAS
-        const resultadoFornecedor = fnConfereFornecedor(pagpdf.pagPdf);             //Informacao sobre o fornecedor
-        const resultadoPedido = fnConferePedido(pagpdf.pagPdf);                     //Infromacao sobre o pedido
+        const resultadoFornecedor = await fnConfereFornecedor(pagpdf.pagPdf);             //Informacao sobre o fornecedor
+        const resultadoPedido = await fnConferePedido(pagpdf.pagPdf);                     //Infromacao sobre o pedido
+        const resultadoOs = await fnConfereOs(pagpdf.pagPdf)
+
 
         //ATUALIZACOES
         linhas.setTituloTb(resultadoFornecedor)
         linhas.setLinhas(linhas.linhas.map(linha => (
-           linha.col1 == "PEDIDO" ? resultadoPedido : linha
+            linha.col1 === "PEDIDO" ? resultadoPedido :
+            linha.col1 === "O.S" ? resultadoOs :
+            linha
         )))
-    
-
     }
-
 
     //Só retorna os resultados das funcoes
     function logs(){

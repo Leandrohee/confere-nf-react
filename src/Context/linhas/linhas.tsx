@@ -3,8 +3,8 @@
 import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 
 //Variavel linhas 
-interface LinhasProps{
-    lin: number
+export interface LinhasProps{
+    lin?: number
     col1: string,
     col2: string|number|null,
     col3: string|number|null,

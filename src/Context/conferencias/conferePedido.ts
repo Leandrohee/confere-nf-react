@@ -1,11 +1,17 @@
+import { LinhasProps } from "../linhas/linhas";
 import { pagPdf } from "../pagPdf/pagPdft";
 
 /* ------------------------ CONFERE SE O N DO PED NA NF E NOS DEMAIS DOCS ----------------------- */
-export function fnConferePedido(pagpdf: pagPdf[]|null): any{
+export async function fnConferePedido(pagpdf: pagPdf[]|null): Promise<LinhasProps>{
     try{
         //Lidando com erros
         if (!pagpdf){
-            return {col4: "Nao foi enviada nenhuma pagina"};
+            return {
+                col1: 'PEDIDO',
+                col2: '-',
+                col3: '-',
+                col4: "Não foi enviado nenhuma página"
+            }
         }
 
         /* ------------------------------- CARREGAMENTO DE DADOS INICIAIS ------------------------------- */

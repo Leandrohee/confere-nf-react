@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import { useLinhasContext } from "../../Context/linhas/linhas";
+import { motion } from "motion/react"
+
 
 /* --------------------------------------------- CSS -------------------------------------------- */
 export const TableSC = styled.table`
@@ -122,19 +124,26 @@ export default function Table() {
         <tbody>
             {
                 linhasProvider.linhas.map((linha,index) => (
-                    <tr 
+                    <motion.tr 
                         key={index}
                         style={
-                            linha.col4 == 'OK' ? {backgroundColor: "lightgreen" } : 
+                            linha.col4 == 'OK' ? {backgroundColor: "#90ee90" } : 
                             linha.col4 == null ? {backgroundColor: "transparent"} :
-                            {background: "salmon"}
+                            {background: "#fa8072"}
                         }
+                        whileHover={{
+                            fontWeight: "bold", 
+                            backgroundColor: 
+                                linha.col4 == 'OK' ? "#55cd55" : 
+                                linha.col4 == null ? "transparent" :
+                                "#d14f41"
+                        }}
                     >
                         <td>{linha.col1}</td>
                         <td>{linha.col2}</td>
                         <td>{linha.col3}</td>
                         <td>{linha.col4}</td>
-                    </tr>
+                    </motion.tr>
                 ))
             }
         </tbody>
