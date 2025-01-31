@@ -15,7 +15,7 @@ export async function fnConfereOs(pagpdf: pagPdf[]|null): Promise<LinhasProps>{
         }
 
         /* ------------------------------- CARREGAMENTO DE DADOS INICIAIS ------------------------------- */
-        const identificadorPagOs = 'RECEPÇÃO CEMEV'                                                     //Essa frase só está na pagina pedido
+        const identificadorPagOs = 'RECEPÇÃO CEMEV'                                                     //Essa frase só está na pagina os
         const primeiraPagina = pagpdf.filter(pagina => pagina.pagina  == 1)[0].conteudo
         const osPagina = pagpdf.filter(pagina => 
             pagina.conteudo.includes(identificadorPagOs)
@@ -51,6 +51,7 @@ export async function fnConfereOs(pagpdf: pagPdf[]|null): Promise<LinhasProps>{
         let vOsNf = matchOsNf[1];
         vOsNf = vOsNf.replace(/[\\\/.-]/gi, "")
 
+        /* ----------------------------------- CONFERINDO O RESULTADO ----------------------------------- */
         //Checar para ver se as os sao iguais
         if  (nOs == vOsNf){
             return {
