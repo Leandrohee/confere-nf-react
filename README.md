@@ -87,3 +87,10 @@ Utilizar a formatacao descrita no arquivo
 # Acrescentar e retirar linhas
 
 Para organizar as linhas ir no arquivo ./Context/linhas/linhas.tsx e configurar a variável **titulosLinhas**
+
+# Identificadores utilizados
+
+- Identificador pagina pedido = 'Pedido Interno de Material'
+- Identificador pagina danfe = 'Digest Value'  
+- Identificador pagina os = 'RECEPÇÃO CEMEV' 
+- Identificador somente rodapé NF = /dados[\s]{0,5}adicionais/gi

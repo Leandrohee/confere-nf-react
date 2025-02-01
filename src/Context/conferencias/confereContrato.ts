@@ -30,10 +30,6 @@ export async function fnConfereContrato(
         const contratoEsperado = fornecedorEncontrado.contrato;
         let [vContrato, anoContrato] = contratoEsperado.split("/");
         anoContrato = anoContrato.slice(-2)     
-        // console.log(vContrato)
-        // console.log(anoContrato)
-        // console.log(primeiraPagina)
-        // console.log(contratoEsperado)
 
         /* ----------------------------- PROCURANDO O NUMERO ESPERADO NA NF ----------------------------- */
         let regexContrato: RegExp|string = `(${vContrato})[\\s \\. \\- \\/ \\\\]{1,6}((20)?${anoContrato})`;
