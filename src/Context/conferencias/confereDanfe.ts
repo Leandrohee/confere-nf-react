@@ -14,10 +14,10 @@ export async function fnConfereDanfe(pagpdf: pagPdf[]|null): Promise<LinhasProps
         }
 
         /* ------------------------------- CARREGAMENTO DE DADOS INICIAIS ------------------------------- */
-        const identificadorPagOs = 'Digest Value'                                                     //Essa frase só está na pagina danfe
+        const identificadorPagDanfe = 'Digest Value'                                                     //Essa frase só está na pagina danfe
         const primeiraPagina = pagpdf.filter(pagina => pagina.pagina  == 1)[0].conteudo
         const danfePagina = pagpdf.filter(pagina => 
-            pagina.conteudo.includes(identificadorPagOs)
+            pagina.conteudo.includes(identificadorPagDanfe)
         )[0].conteudo
         const regexDanfe = new RegExp(/[/\d.-]{58,60}/gi)
 
@@ -41,7 +41,6 @@ export async function fnConfereDanfe(pagpdf: pagPdf[]|null): Promise<LinhasProps
         //Optei por utilizar esse metodo de encontrar um danfe na nf totalmente novo
         const regexDanfeNf = new RegExp(/\d{4}[\d\s]{49,51}/gi)
         const matchDanfeNF = regexDanfeNf.exec(primeiraPagina)
-        console.log(matchDanfeNF)
         if (!matchDanfeNF){
             return {
                 col1: 'DANFE',

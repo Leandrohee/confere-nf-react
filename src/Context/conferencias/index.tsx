@@ -7,6 +7,8 @@ import { useLinhasContext } from "../linhas/linhas"
 import { fnConferePedido } from "./conferePedido"
 import { fnConfereOs } from "./confereOs"
 import { fnConfereDanfe } from "./confereDanfe"
+import { fnConfereEmpenho } from "./confereEmpenho"
+import { fnConfereContrato } from "./confereContrato"
 
 //Tudo oq o context vai distribuir
 interface ConferenciasProps{
@@ -31,6 +33,9 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
         const resultadoPedido = await fnConferePedido(pagpdf.pagPdf);                       //Infromacao sobre o pedido
         const resultadoOs = await fnConfereOs(pagpdf.pagPdf);                               //Informacao sobre a OS
         const resultadoDanfe = await fnConfereDanfe(pagpdf.pagPdf);
+        const resultadoEmpenho = await fnConfereEmpenho(pagpdf.pagPdf, resultadoFornecedor);
+        const resultadoContrato = await fnConfereContrato(pagpdf.pagPdf, resultadoFornecedor);
+
 
         //ATUALIZACOES
         linhas.setTituloTb(resultadoFornecedor)
@@ -38,6 +43,8 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
             linha.col1 === "PEDIDO" ? resultadoPedido :
             linha.col1 === "O.S" ? resultadoOs :
             linha.col1 === "DANFE" ? resultadoDanfe :
+            linha.col1 === "EMPENHO" ? resultadoEmpenho :
+            linha.col1 === "CONTRATO" ? resultadoContrato :
             linha
         )))
     }

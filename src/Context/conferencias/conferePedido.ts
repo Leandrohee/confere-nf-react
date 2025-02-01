@@ -15,7 +15,7 @@ export async function fnConferePedido(pagpdf: pagPdf[]|null): Promise<LinhasProp
         }
 
         /* ------------------------------- CARREGAMENTO DE DADOS INICIAIS ------------------------------- */
-        const identificadorPagPedido = 'Pedido Interno de Material'                                                     //Essa frase só está na pagina pedido
+        const identificadorPagPedido = 'Pedido Interno de Material';                                                     //Essa frase só está na pagina pedido
         const primeiraPagina = pagpdf.filter(pagina => pagina.pagina  == 1)[0].conteudo
         const pedidoPagina = pagpdf.filter(pagina => 
             pagina.conteudo.includes(identificadorPagPedido)
