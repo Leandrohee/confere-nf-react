@@ -101,7 +101,7 @@ export default function Table() {
     const colunas: Array<string> = [
         "CAMPO",
         "NF",
-        "PEDIDO / OS",
+        "DOC",
         "RESULTADO"
     ]; 
 
