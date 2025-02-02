@@ -14,6 +14,9 @@ import { fnConferePlaca } from "./conferePlaca"
 import { fnConfereMarca } from "./confereMarca"
 import { fnConfereDesconto } from "./confereDesconto"
 import { fnConfereKm } from "./confereKm"
+import { fnConfereAno } from "./confereAno"
+import { fnConfereCodigos } from "./confereCodigos"
+import { fnConfereValor } from "./confereValor"
 
 //Tudo oq o context vai distribuir
 interface ConferenciasProps{
@@ -45,7 +48,9 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
         const resultadoMarca = await fnConfereMarca(pagpdf.pagPdf, resultadoFornecedor);
         const resultadoDesconto = await fnConfereDesconto(pagpdf.pagPdf, resultadoFornecedor);
         const resultadoKm = await fnConfereKm(pagpdf.pagPdf);
-
+        const resultadoAno = await fnConfereAno(pagpdf.pagPdf);
+        const resultadoCodigos = await fnConfereCodigos(pagpdf.pagPdf);
+        const resultadoValor = await fnConfereValor(pagpdf.pagPdf, resultadoMarca.col2);
 
         //ATUALIZACOES
         linhas.setTituloTb(resultadoFornecedor)
@@ -60,6 +65,9 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
             linha.col1 === "MARCA" ? resultadoMarca :
             linha.col1 === "DESCONTO" ? resultadoDesconto :
             linha.col1 === "KM" ? resultadoKm :
+            linha.col1 === "ANO" ? resultadoAno :
+            linha.col1 === "CÓDIGOS" ? resultadoCodigos :
+            linha.col1 === "VALOR" ? resultadoValor :
             linha
         )))
     }

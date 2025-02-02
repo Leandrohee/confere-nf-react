@@ -97,4 +97,5 @@ Para organizar como sao identificados as linhas configurar o arquivo ./utils/Mar
 - Identificador pagina pedido = 'Pedido Interno de Material'
 - Identificador pagina danfe = 'Digest Value'  
 - Identificador pagina os = 'RECEPÇÃO CEMEV' 
+- Identificador pagina audatex = 'AudaPad' 
 - Identificador somente rodapé NF = /dados[\s]{0,5}adicionais/gi
