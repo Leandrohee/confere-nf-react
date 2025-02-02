@@ -21,7 +21,7 @@ export const TableSC = styled.table`
     }
 
     p{
-        color: red;
+        color: #FABC3F;
     }
 
     //Arredondando bordas

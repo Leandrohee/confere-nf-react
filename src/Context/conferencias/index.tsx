@@ -11,6 +11,9 @@ import { fnConfereEmpenho } from "./confereEmpenho"
 import { fnConfereContrato } from "./confereContrato"
 import { fnConferePrefixo } from "./conferePrefixo"
 import { fnConferePlaca } from "./conferePlaca"
+import { fnConfereMarca } from "./confereMarca"
+import { fnConfereDesconto } from "./confereDesconto"
+import { fnConfereKm } from "./confereKm"
 
 //Tudo oq o context vai distribuir
 interface ConferenciasProps{
@@ -37,8 +40,12 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
         const resultadoDanfe = await fnConfereDanfe(pagpdf.pagPdf);
         const resultadoEmpenho = await fnConfereEmpenho(pagpdf.pagPdf, resultadoFornecedor);
         const resultadoContrato = await fnConfereContrato(pagpdf.pagPdf, resultadoFornecedor);
-        const resultadoPrefixo = await fnConferePrefixo(pagpdf.pagPdf)
-        const resultadoPlaca = await fnConferePlaca(pagpdf.pagPdf)
+        const resultadoPrefixo = await fnConferePrefixo(pagpdf.pagPdf);
+        const resultadoPlaca = await fnConferePlaca(pagpdf.pagPdf);
+        const resultadoMarca = await fnConfereMarca(pagpdf.pagPdf, resultadoFornecedor);
+        const resultadoDesconto = await fnConfereDesconto(pagpdf.pagPdf, resultadoFornecedor);
+        const resultadoKm = await fnConfereKm(pagpdf.pagPdf);
+
 
         //ATUALIZACOES
         linhas.setTituloTb(resultadoFornecedor)
@@ -50,6 +57,9 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
             linha.col1 === "CONTRATO" ? resultadoContrato :
             linha.col1 === "PREFIXO" ? resultadoPrefixo :
             linha.col1 === "PLACA" ? resultadoPlaca :
+            linha.col1 === "MARCA" ? resultadoMarca :
+            linha.col1 === "DESCONTO" ? resultadoDesconto :
+            linha.col1 === "KM" ? resultadoKm :
             linha
         )))
     }

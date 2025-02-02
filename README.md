@@ -88,6 +88,10 @@ Utilizar a formatacao descrita no arquivo
 
 Para organizar as linhas ir no arquivo ./Context/linhas/linhas.tsx e configurar a variável **titulosLinhas**
 
+# Adicionar modelos para as marcas 
+
+Para organizar como sao identificados as linhas configurar o arquivo ./utils/Marcas/index.ts
+
 # Identificadores utilizados
 
 - Identificador pagina pedido = 'Pedido Interno de Material'

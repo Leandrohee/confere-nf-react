@@ -11,11 +11,11 @@ const fornecedor1 = new Fornecedor(
             desconto: "55,00"                           //Desconto          -> formato: 00,00
         },
         {
-            linha: "fiat",
+            linha: "fiatLeve",
             desconto: "55,00"
         },
         {
-            linha: "gm",
+            linha: "gmLeve",
             desconto: "58,20"
         },
     ]
@@ -27,15 +27,15 @@ const fornecedor2 = new Fornecedor(
     "29/2022",                                          //Contrato          -> formato: 00/0000
     [
         {
-            linha: "citroen",                        //Nome da linha     -> formato: string
+            linha: "citroenLeve",                           //Nome da linha     -> formato: linha/Tipo
             desconto: "43,10"                           //Desconto          -> formato: 00,00
         },
         {
-            linha: "gmUtilitario",
+            linha: "gmUtilitario",                      //
             desconto: "47,51"
         },
         {
-            linha: "jeep",
+            linha: "jeepUtilitario",
             desconto: "49,10"
         },
         {
@@ -47,15 +47,15 @@ const fornecedor2 = new Fornecedor(
             desconto: "47,51"
         },
         {
-            linha: "scania",
+            linha: "scaniaPesado",
             desconto: "36,10"
         },
         {
-            linha: "toyota",
+            linha: "toyotaUtilitario",
             desconto: "36,10"
         },
         {
-            linha: "vw",
+            linha: "vwPesado",
             desconto: "49,10"
         },
     ]
@@ -67,7 +67,7 @@ const fornecedor3 = new Fornecedor(
     "45/2024",                                          //Contrato          -> formato: 00/0000
     [
         {
-            linha: "cummins",                           //Nome da linha     -> formato: string
+            linha: "cumminsPesado",                     //Nome da linha     -> formato: linha/Tipo
             desconto: "41,00"                           //Desconto          -> formato: 00,00
         },
     ]
@@ -79,23 +79,23 @@ const fornecedor4 = new Fornecedor(
     "46/2024",                                              //Contrato          -> formato: 00/0000
     [
         {
-            linha: "renault",                               //Nome da linha     -> formato: string
+            linha: "renaultLeve",                           //Nome da linha     -> formato: linha/tipo
             desconto: "58,10"                               //Desconto          -> formato: 00,00
         },
         {
-            linha: "honda",                                 //Nome da linha     -> formato: string
+            linha: "hondaMoto",                             //Nome da linha     -> formato: linha/tipo
             desconto: "46,00"                               //Desconto          -> formato: 00,00
         },
         {
-            linha: "yamaha",                                //Nome da linha     -> formato: string
+            linha: "yamahaMoto",                            //Nome da linha     -> formato: linha/tipo
             desconto: "46,00"                               //Desconto          -> formato: 00,00
         },
         {
-            linha: "mitsubishi",                            //Nome da linha     -> formato: string
+            linha: "mitsubishiUtilitario",                  //Nome da linha     -> formato: linha/tipo
             desconto: "56,10"                               //Desconto          -> formato: 00,00
         },
         {
-            linha: "iveco",                                 //Nome da linha     -> formato: string
+            linha: "ivecoPesado",                           //Nome da linha     -> formato: linha/tipo
             desconto: "52,10"                               //Desconto          -> formato: 00,00
         },
     ]
@@ -107,11 +107,11 @@ const fornecedor5 = new Fornecedor(
     "44/2024",                                           //Contrato          -> formato: 00/0000
     [
         {
-            linha: "iturri",                            //Nome da linha     -> formato: string
+            linha: "iturriPesado",                      //Nome da linha     -> formato: linha/Tipo
             desconto: "29,00"                           //Desconto          -> formato: 00,00
         },
         {
-            linha: "pierce",                            //Nome da linha     -> formato: string
+            linha: "piercePesado",                            //Nome da linha     -> formato: linha/Tipo
             desconto: "30,00"                           //Desconto          -> formato: 00,00
         },
     ]
@@ -123,7 +123,7 @@ const fornecedor6 = new Fornecedor(
     "43/2024",                                              //Contrato          -> formato: 00/0000
     [
         {
-            linha: "agrale",                                //Nome da linha     -> formato: string
+            linha: "agralePesado",                          //Nome da linha     -> formato: linha/tipo
             desconto: "49,00"                               //Desconto          -> formato: 00,00
         },
     ]
