@@ -25,6 +25,26 @@ export function organizaMarcas(marca: string): string{
         return "agralePesado"
     }; 
 
+    //Convertendo mbPesado
+    if (
+        /mercedes benz/gi.test(marca)
+    ){
+        return "mbPesado"
+    }
+
+    //Convertendo mbUtilitario
+    if (
+        /sprinter/gi.test(marca)
+    ){
+        return "mbUtilitario"
+    }
+
+    //Convertendo vwPesado
+    if (
+        /granmidi/gi.test(marca)
+    ){
+        return "vwPesado"
+    }
 
 
     //Se nao achar nenhum match

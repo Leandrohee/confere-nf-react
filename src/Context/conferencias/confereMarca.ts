@@ -44,7 +44,6 @@ export async function fnConfereMarca(
             }; 
         }
 
-        console.log(matchMarcaOs)
         /* ----------------------------------- PROCURANDO A MARCA NA NF ---------------------------------- */
         const regexMarcaNf =  new RegExp(/(marca[\s \. \: \/]{1,5})([a-z\d]{1,20})/gi);
         const matchMarcaNf = regexMarcaNf.exec(somenteRodapeNf);
