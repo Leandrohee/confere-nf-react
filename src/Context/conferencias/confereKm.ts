@@ -1,7 +1,10 @@
 import { LinhasProps } from "../linhas/linhas";
 import { pagPdf } from "../pagPdf/pagPdft";
 
-export async function fnConfereKm(pagpdf: pagPdf[]|null): Promise<LinhasProps> {
+export async function fnConfereKm(
+    pagpdf: pagPdf[]|null,
+    vFornecedor: string
+): Promise<LinhasProps> {
     try{
         //Lindando com o erro se a pagina nao chegar
         if(!pagpdf){
@@ -16,7 +19,10 @@ export async function fnConfereKm(pagpdf: pagPdf[]|null): Promise<LinhasProps> {
         /* ------------------------------- CARREGANDO AS PAGINAS INICIAIS ------------------------------- */
         const identificadorPagOs = 'RECEPÇÃO CEMEV';
         const primeiraPagina = pagpdf.filter(pagina => pagina.pagina == 1)[0].conteudo;
-        const somenteRodapeNf = primeiraPagina.split(/dados[\s]{0,5}adicionais/gi)[1];
+        let somenteRodapeNf = primeiraPagina.split(/dados[\s]{0,5}adicionais/gi)[1];
+        if (vFornecedor == 'RABELO'){
+            somenteRodapeNf = primeiraPagina.split(/INFORMAÇÕES\s{0,5}COMPLEMENTARES/gi)[1];
+        }
         const osPagina = pagpdf.filter(pagina => (
             pagina.conteudo.includes(identificadorPagOs)
         ))[0].conteudo;
@@ -35,7 +41,7 @@ export async function fnConfereKm(pagpdf: pagPdf[]|null): Promise<LinhasProps> {
 
         /* ------------------------------------ CONFERINDO O KM NA NF ----------------------------------- */
         const kmDividido = matchKmOs[2].replace(" ", "").split(".");                                //[62, 354]
-        let regexKmNf:string|RegExp = `${kmDividido[0]}[\\. \\, \\- \\s]{1,3}${kmDividido[1]}`;
+        let regexKmNf:string|RegExp = `${kmDividido[0]}[\\. \\, \\- \\s]{0,3}${kmDividido[1]}`;
         regexKmNf = new RegExp(regexKmNf,"gi");
         const matchKmNf = regexKmNf.exec(somenteRodapeNf);
         if (!matchKmNf){

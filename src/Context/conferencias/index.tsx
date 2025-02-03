@@ -38,17 +38,17 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
     async function fazConferencias(){
         //CONFERENCIAS
         const resultadoFornecedor = await fnConfereFornecedor(pagpdf.pagPdf);               //Informacao sobre o fornecedor
-        const resultadoPedido = await fnConferePedido(pagpdf.pagPdf);                       //Infromacao sobre o pedido
+        const resultadoPedido = await fnConferePedido(pagpdf.pagPdf, resultadoFornecedor);  //Infromacao sobre o pedido
         const resultadoOs = await fnConfereOs(pagpdf.pagPdf);                               //Informacao sobre a OS
         const resultadoDanfe = await fnConfereDanfe(pagpdf.pagPdf);
         const resultadoEmpenho = await fnConfereEmpenho(pagpdf.pagPdf, resultadoFornecedor);
         const resultadoContrato = await fnConfereContrato(pagpdf.pagPdf, resultadoFornecedor);
-        const resultadoPrefixo = await fnConferePrefixo(pagpdf.pagPdf);
-        const resultadoPlaca = await fnConferePlaca(pagpdf.pagPdf);
+        const resultadoPrefixo = await fnConferePrefixo(pagpdf.pagPdf, resultadoFornecedor);
+        const resultadoPlaca = await fnConferePlaca(pagpdf.pagPdf, resultadoFornecedor);
         const resultadoMarca = await fnConfereMarca(pagpdf.pagPdf, resultadoFornecedor);
         const resultadoDesconto = await fnConfereDesconto(pagpdf.pagPdf, resultadoFornecedor);
-        const resultadoKm = await fnConfereKm(pagpdf.pagPdf);
-        const resultadoAno = await fnConfereAno(pagpdf.pagPdf);
+        const resultadoKm = await fnConfereKm(pagpdf.pagPdf, resultadoFornecedor);
+        const resultadoAno = await fnConfereAno(pagpdf.pagPdf, resultadoFornecedor);
         const resultadoCodigos = await fnConfereCodigos(pagpdf.pagPdf);
         const resultadoValor = await fnConfereValor(pagpdf.pagPdf, resultadoMarca.col2);
 
@@ -76,9 +76,6 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
     function logs(){
         const paginas = pagpdf.pagPdf
         console.log("FORNECEDORES:")
-        console.log(fnConfereFornecedor(paginas))
-        console.log("PEDIDOS:")
-        console.log(fnConferePedido(paginas))
     }
     
     return(

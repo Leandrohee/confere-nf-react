@@ -2,7 +2,10 @@ import { LinhasProps } from "../linhas/linhas";
 import { pagPdf } from "../pagPdf/pagPdft";
 
 /* ------------------------ CONFERE SE O N DO PED NA NF E NOS DEMAIS DOCS ----------------------- */
-export async function fnConferePedido(pagpdf: pagPdf[]|null): Promise<LinhasProps>{
+export async function fnConferePedido(
+    pagpdf: pagPdf[]|null,
+    vFornecedor: string
+): Promise<LinhasProps>{
     try{
         //Lidando com erros
         if (!pagpdf){
@@ -20,14 +23,18 @@ export async function fnConferePedido(pagpdf: pagPdf[]|null): Promise<LinhasProp
         const pedidoPagina = pagpdf.filter(pagina => 
             pagina.conteudo.includes(identificadorPagPedido)
         )[0].conteudo
-        const regexPedNf = new RegExp(/(ped[a-z/\-.:\s]{0,7})(\d{1,4})/gi)
+        let regexPedNf = new RegExp(/(ped[a-z/\-.:\s]{0,7})(\d{1,4})/gi)
         const regexPedDoc = new RegExp(/(pedido[:\s]{1,4})(\d{1,4})/gi)
 
 
         /* ------------------------------------ PROCURANDO PED NA NF ------------------------------------ */
+        //Se a nota for da rabelo tem 2 tipos de pedidos, direcionar para o correto
+        if(vFornecedor == 'RABELO'){
+            regexPedNf = new RegExp(/(ped[\/ \- \. \: \s]{0,5})(\d{1,4})/gi)  
+        } 
+        
         const matchPedNf = regexPedNf.exec(primeiraPagina)
         if(!matchPedNf){
-            console.log("Nao encontrado valor de pedido na NF")
             return {
                 col1: 'PEDIDO',
                 col2: '-',
@@ -40,7 +47,6 @@ export async function fnConferePedido(pagpdf: pagPdf[]|null): Promise<LinhasProp
         /* ------------------------ PROCURANDO PED NOS OUTROS DOCUMENTOS (PEDIDO) ----------------------- */
         const matchPedDoc = regexPedDoc.exec(pedidoPagina)
         if (!matchPedDoc){
-            console.log("Nao encontrado valor de pedido no PEDIDO")
             return {
                 col1: 'PEDIDO',
                 col2: vPedNf,

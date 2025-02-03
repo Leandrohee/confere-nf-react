@@ -14,10 +14,12 @@ export async function fnConfereCodigos(pagpdf: pagPdf[]|null): Promise<LinhasPro
         }
 
         /* ------------------------------ CARREGANDO AS VARIÁVEIS INICIAIS ------------------------------ */
-        const identificadorPagAudatex = 'AudaPad';
         const primeiraPagina = pagpdf.filter(pagina => pagina.pagina == 1)[0].conteudo;
         let audatexPagina:pagPdf[]|string = pagpdf.filter(pagina => (
-            pagina.conteudo.includes(identificadorPagAudatex)
+            pagina.conteudo.includes('AudaPad')
+            || pagina.conteudo.includes('Segurado')
+            // || pagina.conteudo.includes('audatex')
+            // || pagina.conteudo.includes('Audatex')
         ));
 
         if(!audatexPagina[0]){

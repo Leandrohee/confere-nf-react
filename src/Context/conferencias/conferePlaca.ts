@@ -1,7 +1,10 @@
 import { LinhasProps } from "../linhas/linhas";
 import { pagPdf } from "../pagPdf/pagPdft";
 
-export async function fnConferePlaca(pagpdf: pagPdf[]|null): Promise<LinhasProps> {
+export async function fnConferePlaca(
+    pagpdf: pagPdf[]|null,
+    vFornecedor: string
+): Promise<LinhasProps> {
     try{
         //Lindando com o erro se a pagina nao chegar
         if(!pagpdf){
@@ -16,7 +19,10 @@ export async function fnConferePlaca(pagpdf: pagPdf[]|null): Promise<LinhasProps
         /* ------------------------------------ INICIANDO AS PAGINAS ------------------------------------ */
         const identificadorPagOs = 'RECEPÇÃO CEMEV';
         const primeiraPagina = pagpdf.filter(pagina => pagina.pagina == 1)[0].conteudo;
-        const somenteRodapeNf = primeiraPagina.split(/dados[\s]{0,5}adicionais/gi)[1];
+        let somenteRodapeNf = primeiraPagina.split(/dados[\s]{0,5}adicionais/gi)[1];
+        if (vFornecedor == 'RABELO'){
+            somenteRodapeNf = primeiraPagina.split(/INFORMAÇÕES\s{0,5}COMPLEMENTARES/gi)[1];
+        }
         const osPagina = pagpdf.filter(pagina => (
             pagina.conteudo.includes(identificadorPagOs)
         ))[0].conteudo;

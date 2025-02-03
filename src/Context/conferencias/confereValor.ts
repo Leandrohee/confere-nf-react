@@ -20,10 +20,12 @@ export async function fnConfereValor(
 
 
         /* ------------------------------ CARREGANDO AS VARIÁVEIS INICIAIS ------------------------------ */
-        const identificadorPagAudatex = 'AudaPad';
         const primeiraPagina = pagpdf.filter(pagina => pagina.pagina == 1)[0].conteudo;
         let audatexPagina:pagPdf[]|string = pagpdf.filter(pagina => (
-            pagina.conteudo.includes(identificadorPagAudatex)
+            pagina.conteudo.includes('AudaPad')
+            || pagina.conteudo.includes('Segurado')
+            // || pagina.conteudo.includes('audatex')
+            // || pagina.conteudo.includes('Audatex')
         ));
 
         // console.log(primeiraPagina)
@@ -68,37 +70,24 @@ export async function fnConfereValor(
         }
         
         /* --------- DEPOIS DE VERIFICAR O VALOR INDIVIDUAL DOS CODS VERIFICAR O DESCONTO DA NF --------- */
-        // const regexValorTotalNf = new RegExp(
-        //     /(valor\s+total\s+dos\s+produtos[\s \d \,]{1,50})(\s[\d \s \, \.]{2,10}[a-z])/gi
-        // );
-        // const matchValorTotalNf = regexValorTotalNf.exec(primeiraPagina)
-        // if(!matchValorTotalNf){
-        //     return {
-        //         col1: 'VALOR',
-        //         col2: '-',
-        //         col3: '-',
-        //         col4: `Não encontrado valor total da nota`
-        //     };
-        // }
-        // let cleanValorTotalNf:string|number = matchValorTotalNf[2]
-        //     .replace(/[\s a-z]/gi, "")
-        //     .replace(/\./gi,"")
-        //     .replace(",", ".");
-
-        // cleanValorTotalNf = Number(cleanValorTotalNf)
-        // organizaMarcas(marcaString)
-
-        let somenteValores = primeiraPagina.split(/cálculo\s{1,5}do\s{1,5}imposto/gi)[1]
+        const regexNumeros = new RegExp(/\s\d{0,3}.?\d{1,3},?\d{2}\s/gi)
+        let somenteValores: any[]|string = primeiraPagina.split(/cálculo\s{1,5}do\s{1,5}imposto/gi)[1]
         somenteValores = somenteValores.split(/dados\s{1,5}dos?\s{1,5}produtos?/gi)[0];
+        somenteValores = [...somenteValores.matchAll(regexNumeros)]
+        somenteValores = somenteValores.map(valor => (
+            Number(valor[0].replace(/\./gi,"").replace(",",".").replace(/\s/gi,"")) > 0 &&
+            Number(valor[0].replace(/\./gi,"").replace(",",".").replace(/\s/gi,""))
+        ))
+        somenteValores = somenteValores.filter(valores => valores)
 
-        console.log(somenteValores)
+        const provavelValorNfTotal = somenteValores[0]
 
 
         //MELHORAR ESSE CODIGO...
 
         return {
             col1: 'VALOR',
-            col2: `-`,
+            col2: `R$ ${provavelValorNfTotal}`,
             col3: '-',
             col4: "OK"
         };

@@ -20,7 +20,10 @@ export async function fnConfereContrato(
         /* ------------------------------ CARREGANDO AS VARIÁVEIS INICIAIS ------------------------------ */
         const identificadorPagPed = 'Pedido Interno de Material';
         const primeiraPagina = pagpdf.filter(pagina => pagina.pagina == 1)[0].conteudo;
-        const somenteRodapeNf = primeiraPagina.split(/dados[\s]{0,5}adicionais/gi)[1];
+        let somenteRodapeNf = primeiraPagina.split(/dados[\s]{0,5}adicionais/gi)[1];
+        if (vFornecedor == 'RABELO'){
+            somenteRodapeNf = primeiraPagina.split(/INFORMAÇÕES\s{0,5}COMPLEMENTARES/gi)[1];
+        }
         const pedidoPagina = pagpdf.filter(pagina => (
             pagina.conteudo.includes(identificadorPagPed)
         ))[0].conteudo
@@ -61,10 +64,11 @@ export async function fnConfereContrato(
         }
 
         /* -------------------------- PROCURANDO O CONTRATO ESPERADO NO PEDIDO -------------------------- */
-        const matchContratoPed = regexContrato.exec(pedidoPagina)
+        let regexContratoPed:string|RegExp = `(${vContrato})[\\s \\. \\- \\/ \\\\]{1,6}((20)?${anoContrato})`;
+        regexContratoPed = new RegExp(regexContratoPed, "gi");
+        const matchContratoPed = regexContratoPed.exec(pedidoPagina)
 
         /* ------------------------ PROCURANDO O CONTRATO NAO ESPERADO NO PEDIDO ------------------------ */
-        
         if (!matchContratoPed){
             const matchContratoNaoEsperadoPed = regexContratoNaoEsperado.exec(pedidoPagina)
             

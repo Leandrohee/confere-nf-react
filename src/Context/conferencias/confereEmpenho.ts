@@ -62,7 +62,7 @@ export async function fnConfereEmpenho(
             col1: 'EMPENHO',
             col2: empenhoFormatado,
             col3: '-',
-            col4: "Ok"
+            col4: "OK"
         };
 
 

@@ -21,7 +21,10 @@ export async function fnConfereMarca(
         /* ------------------------------- CARREGANDO AS PAGINAS INICIAIS ------------------------------- */
         const identificadorPagOs = 'RECEPÇÃO CEMEV';
         const primeiraPagina = pagpdf.filter(pagina => pagina.pagina == 1)[0].conteudo;
-        const somenteRodapeNf = primeiraPagina.split(/dados[\s]{0,5}adicionais/gi)[1];
+        let somenteRodapeNf = primeiraPagina.split(/dados[\s]{0,5}adicionais/gi)[1];
+        if (vFornecedor == 'RABELO'){
+            somenteRodapeNf = primeiraPagina.split(/INFORMAÇÕES\s{0,5}COMPLEMENTARES/gi)[1];
+        }
         const osPagina = pagpdf.filter(pagina => (
             pagina.conteudo.includes(identificadorPagOs)
         ))[0].conteudo;
@@ -41,14 +44,15 @@ export async function fnConfereMarca(
             }; 
         }
 
-        /* ----------------------------------- PROCURANDO A MARCA NA N ---------------------------------- */
+        console.log(matchMarcaOs)
+        /* ----------------------------------- PROCURANDO A MARCA NA NF ---------------------------------- */
         const regexMarcaNf =  new RegExp(/(marca[\s \. \: \/]{1,5})([a-z\d]{1,20})/gi);
         const matchMarcaNf = regexMarcaNf.exec(somenteRodapeNf);
         if(!matchMarcaNf){
             return {
                 col1: 'MARCA',
                 col2: '-',
-                col3: matchMarcaOs[1],
+                col3: matchMarcaOs[2],
                 col4: "Não encontrado marca na nf"
             }; 
         }

@@ -1,7 +1,10 @@
 import { LinhasProps } from "../linhas/linhas";
 import { pagPdf } from "../pagPdf/pagPdft";
 
-export async function fnConferePrefixo(pagpdf: pagPdf[]|null): Promise<LinhasProps>{
+export async function fnConferePrefixo(
+    pagpdf: pagPdf[]|null,
+    vFornecedor: string
+): Promise<LinhasProps>{
     try{
         //Lindando com o erro se a pagina nao chegar
         if(!pagpdf){
@@ -17,7 +20,10 @@ export async function fnConferePrefixo(pagpdf: pagPdf[]|null): Promise<LinhasPro
         const identificadorPagPed = 'Pedido Interno de Material';
         const identificadorPagOs = 'RECEPÇÃO CEMEV';
         const primeiraPagina = pagpdf.filter(pagina => pagina.pagina == 1)[0].conteudo;
-        const somenteRodapeNf = primeiraPagina.split(/dados[\s]{0,5}adicionais/gi)[1];
+        let somenteRodapeNf = primeiraPagina.split(/dados[\s]{0,5}adicionais/gi)[1];
+        if (vFornecedor == 'RABELO'){
+            somenteRodapeNf = primeiraPagina.split(/INFORMAÇÕES\s{0,5}COMPLEMENTARES/gi)[1];
+        }
         const pedidoPagina = pagpdf.filter(pagina => (
             pagina.conteudo.includes(identificadorPagPed)
         ))[0].conteudo;
@@ -57,7 +63,7 @@ export async function fnConferePrefixo(pagpdf: pagPdf[]|null): Promise<LinhasPro
 
         /* ----------------------------- PROCURANDO O PREFIXO NA NOTA FISCAL ---------------------------- */
         const regexPrefixoNf = new RegExp(
-            /(pref(ixo)?[\: \. \- \/ \s \\]{1,4})([a-z]{2,4}[\- \. \s]{1,4}\d{1,4})/gi
+            /(pref(ixo)?[\: \. \- \/ \s \\]{1,4})([a-z]{2,4}[\- \. \s]{0,4}\d{1,4})/gi
         );
         const matchPrefixoNf = regexPrefixoNf.exec(somenteRodapeNf)
         if(!matchPrefixoNf){

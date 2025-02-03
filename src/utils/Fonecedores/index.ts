@@ -22,7 +22,7 @@ const fornecedor1 = new Fornecedor(
 );
 
 const fornecedor2 = new Fornecedor(
-    "gilson",                                           //Nome              -> formato: string
+    "rabelo",                                           //Nome              -> formato: string
     "14/2025",                                          //Ne                -> formato: 00/0000
     "29/2022",                                          //Contrato          -> formato: 00/0000
     [
