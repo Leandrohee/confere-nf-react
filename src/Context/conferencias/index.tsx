@@ -75,7 +75,6 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
     //Só retorna os resultados das funcoes
     function logs(){
         const paginas = pagpdf.pagPdf
-        console.log("FORNECEDORES:")
     }
     
     return(

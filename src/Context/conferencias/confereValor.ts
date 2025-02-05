@@ -123,12 +123,6 @@ export async function fnConfereValor(
         }
         const descontoEncontrado = Number((1- (cleanValorDescontoNf/cleanValorTotalNf)).toFixed(4))
 
-
-        console.log(cleanValorTotalNf)
-        console.log(cleanValorDescontoNf)
-        console.log(cleanDesconto)
-        console.log(descontoEncontrado)
-
         if(descontoEncontrado !== cleanDesconto){
             return {
                 col1: 'VALOR',

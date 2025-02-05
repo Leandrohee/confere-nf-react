@@ -21,7 +21,6 @@ export default function Help() {
     const conferencias = useConferenciasContext()
 
     function handleClick(){
-        console.log(linhas.linhas)
         // conferencias.logs()
     }
 
