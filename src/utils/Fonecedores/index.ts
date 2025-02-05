@@ -27,11 +27,11 @@ const fornecedor2 = new Fornecedor(
     "29/2022",                                          //Contrato          -> formato: 00/0000
     [
         {
-            linha: "citroenLeve",                           //Nome da linha     -> formato: linha/Tipo
+            linha: "citroenLeve",                       //Nome da linha     -> formato: linha/Tipo
             desconto: "43,10"                           //Desconto          -> formato: 00,00
         },
         {
-            linha: "gmUtilitario",                      //
+            linha: "gmUtilitario",                      
             desconto: "47,51"
         },
         {
@@ -57,6 +57,10 @@ const fornecedor2 = new Fornecedor(
         {
             linha: "vwPesado",
             desconto: "49,10"
+        },
+        {
+            linha: "fordUtilitario",
+            desconto: "43,10"
         },
     ]
 );

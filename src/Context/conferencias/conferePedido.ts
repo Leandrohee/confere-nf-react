@@ -22,7 +22,7 @@ export async function fnConferePedido(
         const primeiraPagina = pagpdf.filter(pagina => pagina.pagina  == 1)[0].conteudo
         const pedidoPagina = pagpdf.filter(pagina => 
             pagina.conteudo.includes(identificadorPagPedido)
-        )[0].conteudo
+        )[0].conteudo;
         let regexPedNf = new RegExp(/(ped[a-z/\-.:\s]{0,7})(\d{1,4})/gi)
         const regexPedDoc = new RegExp(/(pedido[:\s]{1,4})(\d{1,4})/gi)
 

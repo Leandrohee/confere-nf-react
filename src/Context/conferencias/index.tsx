@@ -50,7 +50,7 @@ export function ConferenciasProvider({children}: {children: React.ReactNode}){
         const resultadoKm = await fnConfereKm(pagpdf.pagPdf, resultadoFornecedor);
         const resultadoAno = await fnConfereAno(pagpdf.pagPdf, resultadoFornecedor);
         const resultadoCodigos = await fnConfereCodigos(pagpdf.pagPdf);
-        const resultadoValor = await fnConfereValor(pagpdf.pagPdf, resultadoMarca.col2);
+        const resultadoValor = await fnConfereValor(pagpdf.pagPdf, resultadoCodigos.col2, resultadoDesconto.col2);
 
         //ATUALIZACOES
         linhas.setTituloTb(resultadoFornecedor)

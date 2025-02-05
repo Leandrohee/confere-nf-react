@@ -32,63 +32,48 @@ export async function fnConfereMarca(
             fornecedor.nome == vFornecedor.toLocaleLowerCase()
         ))[0];
 
-        /* ---------------------------------- PROCURANDO A MARCA NA OS ---------------------------------- */
-        const regexMarcaOs = new RegExp(/(marca[\s \. \: \/]{1,5})([a-z \d \s]{1,30})Modelo/gi);
-        const matchMarcaOs = regexMarcaOs.exec(osPagina);
-        if(!matchMarcaOs){
+        /* ------------------------ PEGANDO O MODELO NA OS PARA VERIFICAR A MARCA ----------------------- */
+        const regexModeloOs = new RegExp(/(modelo[\s \. \: \/]{1,5})([a-z \d \. \s]{1,30})hod/gi);
+        const matchModeloOs = regexModeloOs.exec(osPagina);
+        if(!matchModeloOs){
             return {
                 col1: 'MARCA',
                 col2: '-',
                 col3: '-',
-                col4: "Não encontrado marca na os"
+                col4: "Não encontrado modelo na os"
             }; 
         }
 
-        /* ----------------------------------- PROCURANDO A MARCA NA NF ---------------------------------- */
-        const regexMarcaNf =  new RegExp(/(marca[\s \. \: \/]{1,5})([a-z\d]{1,20})/gi);
-        const matchMarcaNf = regexMarcaNf.exec(somenteRodapeNf);
-        if(!matchMarcaNf){
+        /* --------------------------- PEGANDO A MARCA REFERENTE A ESSE MODELO -------------------------- */
+        const marca = organizaMarcas(matchModeloOs[2])
+
+        if (typeof marca == 'boolean'){
             return {
                 col1: 'MARCA',
                 col2: '-',
-                col3: matchMarcaOs[2],
-                col4: "Não encontrado marca na nf"
+                col3: matchModeloOs[2],
+                col4: "Não encontrado marca pra esse modelo"
             }; 
         }
 
-        /* ----------------- VERIFICANDO SE AS MARCAS SAO REFERENTES A ESSE FORNECEDEDOR ---------------- */
-        const cleanMarcaNf = organizaMarcas(matchMarcaNf[2]);
-        const cleanMarcaOs = organizaMarcas(matchMarcaOs[2]);
-        const marcaNfOk = fornecedorEncontrado.linhas.some(linha =>(
-            linha.linha == cleanMarcaNf
-        ));
-        const marcaOsOk = fornecedorEncontrado.linhas.some(linha =>(
-            linha.linha == cleanMarcaOs
-        ));
-
-        if (marcaNfOk == false || marcaOsOk == false){
+        /* ---------------------- VERIFICANDO SE A MARCA É REFERENTE AO FORNECEDOR ---------------------- */
+        const matchMarca = fornecedorEncontrado.linhas.some(linha => (
+            linha.linha == marca
+        ))
+        if(!matchMarca){
             return {
                 col1: 'MARCA',
-                col2: matchMarcaNf[2],
-                col3: matchMarcaOs[2],
-                col4: "Essa marca não é desse fornecedor"
+                col2: '-',
+                col3: marca,
+                col4: "Esse modelo não é referente a esse fornecedor"
             }; 
-        }
-
-        if (cleanMarcaNf !== cleanMarcaOs){
-            return {
-                col1: 'MARCA',
-                col2: matchMarcaNf[2],
-                col3: matchMarcaOs[2],
-                col4: "Marca da os incompatível com a da nf"
-            };  
         }
 
         /* --------------------------------------- SE TUDO CORRETO -------------------------------------- */
         return {
             col1: 'MARCA',
-            col2: matchMarcaNf[2],
-            col3: matchMarcaOs[2],
+            col2: '-',
+            col3: marca,
             col4: "OK"
         };
 

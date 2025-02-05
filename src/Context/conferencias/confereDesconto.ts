@@ -37,13 +37,11 @@ export async function fnConfereDesconto(
         ))[0];
 
         /* --------------------- CONFERINDO O MODELO NA OS PARA CALCULAR O DESCONTO --------------------- */
-        const regexModeloOs = new RegExp(/(modelo[\s \. \: \/]{1,5})([a-z \d \s]{1,30})hod/gi);
+        const regexModeloOs = new RegExp(/(modelo[\s \. \: \/]{1,5})([a-z \d \. \s]{1,30})hod/gi);
         const matchModeloOs = regexModeloOs.exec(osPagina);
-        console.log(regexModeloOs)
-        console.log(matchModeloOs)
         if(!matchModeloOs){
             return {
-                col1: 'MARCA',
+                col1: 'DESCONTO',
                 col2: '-',
                 col3: '-',
                 col4: "Não encontrado modelo na os"
@@ -52,8 +50,16 @@ export async function fnConfereDesconto(
 
         /* --------------------- DESCOBRINDO O DESCONTO ATRAVES DO MODELO DO VEICULO -------------------- */
         const cleanMarca = organizaMarcas(matchModeloOs[2])
-        console.log(matchModeloOs[2])
-        console.log(cleanMarca)
+
+        if(!cleanMarca){
+            return {
+                col1: 'DESCONTO',
+                col2: '-',
+                col3: matchModeloOs[2],
+                col4: `Não encontrado o desconto para o modelo`
+            };
+        }
+
         const descontoProcurado = fornecedorEncontrado.linhas.filter(linha => (
             linha.linha == cleanMarca
         ))[0].desconto.split(",")
