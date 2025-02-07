@@ -199,13 +199,67 @@ Error generating stack: `+P.message+`
     font-weight: bold;
     margin: auto;
 
-`;function UploadBox(){const n=reactExports.useRef(null),[r,i]=reactExports.useState(null),a=usePagPdfContext(),c=useLinhasContext();function p(){n.current&&n.current.click()}async function h(N){var Le;const b=(Le=N.target.files)==null?void 0:Le[0];if(c.setTituloTb(vTituloTb),c.setLinhas(vLinhasPadrao()),a.setPagPfg(null),b.type!=="application/pdf"){i("Please select a valid PDF file.");return}i(b.name);const E=new FileReader;E.readAsArrayBuffer(b),E.onload=async nt=>{const Be=new Uint8Array(nt.target.result),Ye=await pdfExports.getDocument(Be).promise;de(Ye)}}async function de(N){let b=[];for(let E=1;E<=N.numPages;E++){const Be=(await(await N.getPage(E)).getTextContent()).items.map(Ye=>Ye.str).join(" ");b.push({pagina:E,conteudo:Be})}a.setPagPfg(b)}return jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment,{children:[jsxRuntimeExports.jsx(UploadBoxSC,{onClick:p,children:"Selecione o arquivo NF (PDF)"}),jsxRuntimeExports.jsx(Description,{children:r}),jsxRuntimeExports.jsx("input",{ref:n,type:"file",accept:"application/pdf",style:{display:"none"},onChange:h})]})}const helpIcon="/confere-nf-react/assets/help-DyboQUNs.png",HelpSc=dt(motion.img)`
+`;function UploadBox(){const n=reactExports.useRef(null),[r,i]=reactExports.useState(null),a=usePagPdfContext(),c=useLinhasContext();function p(){n.current&&n.current.click()}async function h(N){var Le;const b=(Le=N.target.files)==null?void 0:Le[0];if(c.setTituloTb(vTituloTb),c.setLinhas(vLinhasPadrao()),a.setPagPfg(null),b.type!=="application/pdf"){i("Please select a valid PDF file.");return}i(b.name);const E=new FileReader;E.readAsArrayBuffer(b),E.onload=async nt=>{const Be=new Uint8Array(nt.target.result),Ye=await pdfExports.getDocument(Be).promise;de(Ye)}}async function de(N){let b=[];for(let E=1;E<=N.numPages;E++){const Be=(await(await N.getPage(E)).getTextContent()).items.map(Ye=>Ye.str).join(" ");b.push({pagina:E,conteudo:Be})}a.setPagPfg(b)}return jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment,{children:[jsxRuntimeExports.jsx(UploadBoxSC,{onClick:p,children:"Selecione o arquivo NF (PDF)"}),jsxRuntimeExports.jsx(Description,{children:r}),jsxRuntimeExports.jsx("input",{ref:n,type:"file",accept:"application/pdf",style:{display:"none"},onChange:h})]})}const CloseButtonSc=dt.div`
+    height: ${({$size:n})=>n||"5px"};
+    width: ${({$size:n})=>n||"5px"};
+    border-radius: 50%;
+    background-color: #fe5f58;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover{
+        background-color: #f31d12;
+    }
+
+    div{
+        display: ${({$hasCenterDot:n})=>n?"inline":"none"};
+        height: 20%;
+        width: 20%;
+        border-radius: 50%;
+        background-color: #5d5959;
+    }
+`;function CloseButton({size:n,hasCenterDot:r}){return jsxRuntimeExports.jsx(CloseButtonSc,{$size:n,$hasCenterDot:r,children:jsxRuntimeExports.jsx("div",{})})}const PixBoxSc=dt.div`
+    /* background-color: #ff000036; */
+    width: 95%;
+    height: 95%;
+
+    .divCloseBtn{
+        width: 100%;
+        /* background-color: yellow; */
+        display: flex;
+        justify-content: end;
+    }
+
+    .pix{
+        font-size: 5px;
+        color: black;
+        text-align: center;
+    }
+
+    .valorPix{
+        margin-top: 8px;
+        font-size: 5px;
+        color: #2200ff;
+        text-align: center;
+    }
+
+`;function PixBox({setAnimate:n}){const[r,i]=reactExports.useState(!1);return setTimeout(()=>{i(!0)},1e3),jsxRuntimeExports.jsx(PixBoxSc,{children:r&&jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment,{children:[jsxRuntimeExports.jsx("div",{className:"divCloseBtn",children:jsxRuntimeExports.jsx("div",{onClick:()=>n(!1),children:jsxRuntimeExports.jsx(CloseButton,{size:"1.3px"})})}),jsxRuntimeExports.jsxs("div",{children:[jsxRuntimeExports.jsx("p",{className:"pix",children:"Pix do Leandro:"}),jsxRuntimeExports.jsx("p",{className:"valorPix",children:"(62) 992509445"})]})]})})}const HelpSc=dt(motion.div)`
     position: absolute;
     right: 10px;
     top: 10px;
     width: 40px;
-    cursor: pointer;
-`;function Help(){usePagPdfContext(),useLinhasContext(),useConferenciasContext();function n(){}return jsxRuntimeExports.jsx(HelpSc,{whileHover:{scale:1.3},onClick:n,src:helpIcon,alt:"help-icon"})}const HomeSc=dt.div`
+    height: 40px;
+    color: white;
+    font-size: 30px;
+    font-weight: 500;
+    border-radius: 50%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+`;function Help(){const[n,r]=reactExports.useState(!1),i=reactExports.useRef(!1);reactExports.useEffect(()=>{i.current=!0;function c(){r(!1)}return window.addEventListener("click",c),()=>{window.removeEventListener("click",c)}},[]);function a(c){c.stopPropagation(),!n&&r(!n)}return jsxRuntimeExports.jsx(HelpSc,{whileHover:n?"":{cursor:"pointer"},animate:n&&i.current?{x:[0,"-46.5vw","-46.5vw"],y:[0,"50vh","50vh"],borderRadius:["50%","50%","5%"],width:["40px","40px","60px"],backgroundColor:["#000000","#4d4d4d","#d4d2d2"],scale:[1,15],transition:{duration:1,times:[0,.3,1]}}:!n&&i.current?{x:["-46.5vw","-46.5vw",0],y:["50vh","50vh",0],borderRadius:["5%","50%","50%"],width:["60px","40px","40px"],backgroundColor:["#d4d2d2","#4d4d4d","black"],color:["white"],scale:[15,1],transition:{duration:1}}:"",onClick:a,children:n?jsxRuntimeExports.jsx(PixBox,{setAnimate:r}):"?"})}const HomeSc=dt.div`
     display: flex;
     flex-direction: column;
 
